@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
 <title>交易系統流程圖</title>
 <style>
 
@@ -32,14 +33,36 @@
 
 html {
 background: #0a0c10 !important;
+color-scheme: dark;
 }
 
 body {
 background: #0a0c10 !important;
-color: var(–text);
+color: #ffffff !important;
 font-family: -apple-system, ‘PingFang TC’, ‘Helvetica Neue’, sans-serif;
 min-height: 100vh;
 overflow-x: hidden;
+}
+
+.flow-card, .mode-card, .rule-card, .check-item, .switch-card, .detail-inner, .ov-node {
+background-color: #252d3d !important;
+color: #ffffff !important;
+}
+
+.card-title, .rule-title, .check-title, .mode-name, .detail-title, .ov-name {
+color: #ffffff !important;
+}
+
+.field-value, .rule-trigger, .check-desc, .mode-condition, .switch-condition, .detail-val, .ov-desc {
+color: #cccccc !important;
+}
+
+.field-label, .detail-label, .ov-step {
+color: #aaaaaa !important;
+}
+
+.card-top, .output-row, .rule-action {
+color: #ffffff !important;
 }
 
 /* BG grid */
