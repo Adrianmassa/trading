@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>交易系統流程圖</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
 
 :root {
 –bg: #0a0c10;
@@ -31,8 +31,12 @@
 
 - { box-sizing: border-box; margin: 0; padding: 0; }
 
+html {
+background: #0a0c10 !important;
+}
+
 body {
-background: var(–bg);
+background: #0a0c10 !important;
 color: var(–text);
 font-family: ‘Noto Sans TC’, sans-serif;
 min-height: 100vh;
@@ -562,545 +566,556 @@ animation: fadeIn 0.3s ease both;
 <body>
 <div class="app">
 
-<div class="header">
-<div class="header-label">Trading System</div>
-<h1>交易系統完整流程</h1>
-<p>點擊任意節點查看詳細說明 ／ 點擊分頁切換流程區塊</p>
-</div>
+  <div class="header">
+    <div class="header-label">Trading System</div>
+    <h1>交易系統完整流程</h1>
+    <p>點擊任意節點查看詳細說明 ／ 點擊分頁切換流程區塊</p>
+  </div>
 
-<div class="tabs" id="tabs">
-<button class="tab active" onclick="switchTab('overview')">總覽</button>
-<button class="tab" onclick="switchTab('main')">總流程</button>
-<button class="tab" onclick="switchTab('mode')">模式判斷</button>
-<button class="tab" onclick="switchTab('entry')">進場</button>
-<button class="tab" onclick="switchTab('hold')">持有</button>
-<button class="tab" onclick="switchTab('rules')">強制規則</button>
-<button class="tab" onclick="switchTab('exit')">出場</button>
-<button class="tab" onclick="switchTab('check')">違規檢查</button>
-</div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" onclick="switchTab('overview')">總覽</button>
+    <button class="tab" onclick="switchTab('main')">總流程</button>
+    <button class="tab" onclick="switchTab('mode')">模式判斷</button>
+    <button class="tab" onclick="switchTab('entry')">進場</button>
+    <button class="tab" onclick="switchTab('hold')">持有</button>
+    <button class="tab" onclick="switchTab('rules')">強制規則</button>
+    <button class="tab" onclick="switchTab('exit')">出場</button>
+    <button class="tab" onclick="switchTab('check')">違規檢查</button>
+  </div>
 
-<!-- OVERVIEW -->
+  <!-- OVERVIEW -->
 
-<div class="section active" id="tab-overview">
-<div class="overview">
-<div class="ov-start">開始交易日</div>
-<div class="ov-connector"></div>
-<div class="ov-node" style="--node-color:#f0b429" onclick="openDetail('S0')">
-<div class="ov-icon">🧭</div>
-<div class="ov-text">
-<div class="ov-step">S0 · 最高優先</div>
-<div class="ov-name">市場模式判斷</div>
-<div class="ov-desc">先決定今天用 A模式（進攻）或 B模式（防守）</div>
-</div>
-</div>
-<div class="ov-connector"></div>
-<div class="ov-branch">
-<div class="ov-branch-line"></div>
-<div class="ov-branch-text">↙ A模式 60~80% ／ B模式 20~40% ↘</div>
-<div class="ov-branch-line"></div>
-</div>
-<div class="ov-connector"></div>
-<div class="ov-node" style="--node-color:#52c41a" onclick="openDetail('S1')">
-<div class="ov-icon">🎯</div>
-<div class="ov-text">
-<div class="ov-step">S1 · 高優先</div>
-<div class="ov-name">進場判斷</div>
-<div class="ov-desc">低檔強攻試單 → 突破確認加碼</div>
-</div>
-</div>
-<div class="ov-connector"></div>
-<div class="ov-node" style="--node-color:#1890ff" onclick="openDetail('S2')">
-<div class="ov-icon">📊</div>
-<div class="ov-text">
-<div class="ov-step">S2 · 高優先</div>
-<div class="ov-name">持有管理</div>
-<div class="ov-desc">走對續抱／走弱減碼／走錯砍單</div>
-</div>
-</div>
-<div class="ov-connector" style="background:var(--red)"></div>
-<div class="ov-node" style="--node-color:#ff4d4f; border-color:rgba(255,77,79,0.4)" onclick="openDetail('S3')">
-<div class="ov-icon">🚨</div>
-<div class="ov-text">
-<div class="ov-step">S3 · 最高優先 — 可覆蓋所有步驟</div>
-<div class="ov-name">強制規則檢查</div>
-<div class="ov-desc">R1~R8 任一成立即強制執行，不討論</div>
-</div>
-</div>
-<div class="ov-connector"></div>
-<div class="ov-node" style="--node-color:#fa8c16" onclick="openDetail('S4')">
-<div class="ov-icon">💰</div>
-<div class="ov-text">
-<div class="ov-step">S4 · 高優先</div>
-<div class="ov-name">出場執行</div>
-<div class="ov-desc">分批停利 → 保留底倉 → 結構停損</div>
-</div>
-</div>
-<div class="ov-connector"></div>
-<div class="ov-node" style="--node-color:#9254de" onclick="openDetail('S5')">
-<div class="ov-icon">📝</div>
-<div class="ov-text">
-<div class="ov-step">S5 · 中優先</div>
-<div class="ov-name">交易檢討</div>
-<div class="ov-desc">是否遵守系統？違規記錄 → 優化規則</div>
-</div>
-</div>
-</div>
-</div>
+  <div class="section active" id="tab-overview">
+    <div class="overview">
+      <div class="ov-start">開始交易日</div>
+      <div class="ov-connector"></div>
+      <div class="ov-node" style="--node-color:#f0b429" onclick="openDetail('S0')">
+        <div class="ov-icon">🧭</div>
+        <div class="ov-text">
+          <div class="ov-step">S0 · 最高優先</div>
+          <div class="ov-name">市場模式判斷</div>
+          <div class="ov-desc">先決定今天用 A模式（進攻）或 B模式（防守）</div>
+        </div>
+      </div>
+      <div class="ov-connector"></div>
+      <div class="ov-branch">
+        <div class="ov-branch-line"></div>
+        <div class="ov-branch-text">↙ A模式 60~80% ／ B模式 20~40% ↘</div>
+        <div class="ov-branch-line"></div>
+      </div>
+      <div class="ov-connector"></div>
+      <div class="ov-node" style="--node-color:#52c41a" onclick="openDetail('S1')">
+        <div class="ov-icon">🎯</div>
+        <div class="ov-text">
+          <div class="ov-step">S1 · 高優先</div>
+          <div class="ov-name">進場判斷</div>
+          <div class="ov-desc">低檔強攻試單 → 突破確認加碼</div>
+        </div>
+      </div>
+      <div class="ov-connector"></div>
+      <div class="ov-node" style="--node-color:#1890ff" onclick="openDetail('S2')">
+        <div class="ov-icon">📊</div>
+        <div class="ov-text">
+          <div class="ov-step">S2 · 高優先</div>
+          <div class="ov-name">持有管理</div>
+          <div class="ov-desc">走對續抱／走弱減碼／走錯砍單</div>
+        </div>
+      </div>
+      <div class="ov-connector" style="background:var(--red)"></div>
+      <div class="ov-node" style="--node-color:#ff4d4f; border-color:rgba(255,77,79,0.4)" onclick="openDetail('S3')">
+        <div class="ov-icon">🚨</div>
+        <div class="ov-text">
+          <div class="ov-step">S3 · 最高優先 — 可覆蓋所有步驟</div>
+          <div class="ov-name">強制規則檢查</div>
+          <div class="ov-desc">R1~R8 任一成立即強制執行，不討論</div>
+        </div>
+      </div>
+      <div class="ov-connector"></div>
+      <div class="ov-node" style="--node-color:#fa8c16" onclick="openDetail('S4')">
+        <div class="ov-icon">💰</div>
+        <div class="ov-text">
+          <div class="ov-step">S4 · 高優先</div>
+          <div class="ov-name">出場執行</div>
+          <div class="ov-desc">分批停利 → 保留底倉 → 結構停損</div>
+        </div>
+      </div>
+      <div class="ov-connector"></div>
+      <div class="ov-node" style="--node-color:#9254de" onclick="openDetail('S5')">
+        <div class="ov-icon">📝</div>
+        <div class="ov-text">
+          <div class="ov-step">S5 · 中優先</div>
+          <div class="ov-name">交易檢討</div>
+          <div class="ov-desc">是否遵守系統？違規記錄 → 優化規則</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!-- MAIN FLOW -->
+  <!-- MAIN FLOW -->
 
-<div class="section" id="tab-main">
-<div class="flow">
-<div class="flow-card" style="--card-accent:#f0b429" onclick="openDetail('S0')">
-<div class="card-top">
-<span class="step-badge">S0</span>
-<span class="card-title">市場模式判斷</span>
-<span class="priority-badge priority-最高">最高</span>
-</div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">目的</div><div class="field-value">先判斷今天該用 A 還是 B 模式</div></div>
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">開盤前 / 收盤後依大盤、族群、持股結構判斷</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value">先決定模式，再進入後續流程</div></div>
-<div class="card-field"><div class="field-label">部位規則</div><div class="field-value">無</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">A模式 或 B模式</span></div>
-</div>
-<div class="connector gold"></div>
-<div class="flow-card" style="--card-accent:#52c41a" onclick="openDetail('S1')">
-<div class="card-top">
-<span class="step-badge">S1</span>
-<span class="card-title">進場判斷</span>
-<span class="priority-badge priority-高">高</span>
-</div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">目的</div><div class="field-value">決定是否建立新倉</div></div>
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">符合低檔強攻或突破確認條件</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value">建立試單或加碼</div></div>
-<div class="card-field"><div class="field-label">部位規則</div><div class="field-value">依進場規則</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">進場 / 不進場</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#1890ff" onclick="openDetail('S2')">
-<div class="card-top">
-<span class="step-badge">S2</span>
-<span class="card-title">持有管理</span>
-<span class="priority-badge priority-高">高</span>
-</div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">目的</div><div class="field-value">讓對的單續抱、錯的單縮手</div></div>
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">持股中且未觸發強制規則</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value">依趨勢、量能、籌碼管理持股</div></div>
-<div class="card-field"><div class="field-label">部位規則</div><div class="field-value">依持有規則</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">續抱 / 減碼 / 出場</span></div>
-</div>
-<div class="connector" style="background:var(--red)"></div>
-<div class="flow-card" style="--card-accent:#ff4d4f" onclick="openDetail('S3')">
-<div class="card-top">
-<span class="step-badge">S3</span>
-<span class="card-title">強制規則檢查 ⚡ 可覆蓋所有步驟</span>
-<span class="priority-badge priority-最高">最高</span>
-</div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">目的</div><div class="field-value">防止回吐獲利與擴大虧損</div></div>
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">只要盤中 / 收盤後符合強制條件</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">直接執行，不再討論</div></div>
-<div class="card-field"><div class="field-label">部位規則</div><div class="field-value">依強制規則</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">強制減碼 / 強制賣出</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#fa8c16" onclick="openDetail('S4')">
-<div class="card-top">
-<span class="step-badge">S4</span>
-<span class="card-title">出場執行</span>
-<span class="priority-badge priority-高">高</span>
-</div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">目的</div><div class="field-value">完成停利或停損</div></div>
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">符合分批停利、結構破壞、風險事件</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value">執行分批出場或全出</div></div>
-<div class="card-field"><div class="field-label">部位規則</div><div class="field-value">依出場規則</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">部分出場 / 全出</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#9254de" onclick="openDetail('S5')">
-<div class="card-top">
-<span class="step-badge">S5</span>
-<span class="card-title">交易檢討</span>
-<span class="priority-badge priority-中">中</span>
-</div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">目的</div><div class="field-value">確認是否有違規與優化空間</div></div>
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">每天收盤後 / 每週檢討</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value">記錄這筆單是否遵守系統</div></div>
-<div class="card-field"><div class="field-label">部位規則</div><div class="field-value">無</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">保留 / 修正 / 記錯</span></div>
-</div>
-</div>
-</div>
+  <div class="section" id="tab-main">
+    <div class="flow">
+      <div class="flow-card" style="--card-accent:#f0b429" onclick="openDetail('S0')">
+        <div class="card-top">
+          <span class="step-badge">S0</span>
+          <span class="card-title">市場模式判斷</span>
+          <span class="priority-badge priority-最高">最高</span>
+        </div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">目的</div><div class="field-value">先判斷今天該用 A 還是 B 模式</div></div>
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">開盤前 / 收盤後依大盤、族群、持股結構判斷</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value">先決定模式，再進入後續流程</div></div>
+          <div class="card-field"><div class="field-label">部位規則</div><div class="field-value">無</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">A模式 或 B模式</span></div>
+      </div>
+      <div class="connector gold"></div>
+      <div class="flow-card" style="--card-accent:#52c41a" onclick="openDetail('S1')">
+        <div class="card-top">
+          <span class="step-badge">S1</span>
+          <span class="card-title">進場判斷</span>
+          <span class="priority-badge priority-高">高</span>
+        </div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">目的</div><div class="field-value">決定是否建立新倉</div></div>
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">符合低檔強攻或突破確認條件</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value">建立試單或加碼</div></div>
+          <div class="card-field"><div class="field-label">部位規則</div><div class="field-value">依進場規則</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">進場 / 不進場</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#1890ff" onclick="openDetail('S2')">
+        <div class="card-top">
+          <span class="step-badge">S2</span>
+          <span class="card-title">持有管理</span>
+          <span class="priority-badge priority-高">高</span>
+        </div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">目的</div><div class="field-value">讓對的單續抱、錯的單縮手</div></div>
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">持股中且未觸發強制規則</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value">依趨勢、量能、籌碼管理持股</div></div>
+          <div class="card-field"><div class="field-label">部位規則</div><div class="field-value">依持有規則</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">續抱 / 減碼 / 出場</span></div>
+      </div>
+      <div class="connector" style="background:var(--red)"></div>
+      <div class="flow-card" style="--card-accent:#ff4d4f" onclick="openDetail('S3')">
+        <div class="card-top">
+          <span class="step-badge">S3</span>
+          <span class="card-title">強制規則檢查 ⚡ 可覆蓋所有步驟</span>
+          <span class="priority-badge priority-最高">最高</span>
+        </div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">目的</div><div class="field-value">防止回吐獲利與擴大虧損</div></div>
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">只要盤中 / 收盤後符合強制條件</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">直接執行，不再討論</div></div>
+          <div class="card-field"><div class="field-label">部位規則</div><div class="field-value">依強制規則</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">強制減碼 / 強制賣出</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#fa8c16" onclick="openDetail('S4')">
+        <div class="card-top">
+          <span class="step-badge">S4</span>
+          <span class="card-title">出場執行</span>
+          <span class="priority-badge priority-高">高</span>
+        </div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">目的</div><div class="field-value">完成停利或停損</div></div>
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">符合分批停利、結構破壞、風險事件</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value">執行分批出場或全出</div></div>
+          <div class="card-field"><div class="field-label">部位規則</div><div class="field-value">依出場規則</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">部分出場 / 全出</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#9254de" onclick="openDetail('S5')">
+        <div class="card-top">
+          <span class="step-badge">S5</span>
+          <span class="card-title">交易檢討</span>
+          <span class="priority-badge priority-中">中</span>
+        </div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">目的</div><div class="field-value">確認是否有違規與優化空間</div></div>
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">每天收盤後 / 每週檢討</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value">記錄這筆單是否遵守系統</div></div>
+          <div class="card-field"><div class="field-label">部位規則</div><div class="field-value">無</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">保留 / 修正 / 記錯</span></div>
+      </div>
+    </div>
+  </div>
 
-<!-- MODE -->
+  <!-- MODE -->
 
-<div class="section" id="tab-mode">
-<div class="flow" style="gap:16px">
-<div class="mode-split">
-<div class="mode-card mode-a" onclick="openDetail('M1')">
-<div class="mode-label">A</div>
-<div class="mode-name">主升段 · 主動進攻</div>
-<div class="mode-condition">大盤或族群多頭<br>標的明確主升段<br>籌碼持續偏多<br>允許加碼、攻擊性強</div>
-<div class="mode-position">部位 60%～80%</div>
-</div>
-<div class="mode-card mode-b" onclick="openDetail('M2')">
-<div class="mode-label">B</div>
-<div class="mode-name">震盪防守 · 降頻交易</div>
-<div class="mode-condition">盤勢不明 / 結構混亂<br>主升段不明確<br>已有戰果要守<br>只做 A+ setup</div>
-<div class="mode-position">部位 20%～40%</div>
-</div>
-</div>
-<div class="switch-row">
-<div class="switch-card" onclick="openDetail('M3')">
-<div class="switch-dir ab">A → B 切換</div>
-<div class="switch-condition">主升段結束、持股轉弱、族群退潮、波動加大<br>→ 縮部位、停加碼、提高出場敏感度</div>
-</div>
-<div class="switch-card" onclick="openDetail('M4')">
-<div class="switch-dir ba">B → A 切換</div>
-<div class="switch-condition">至少3項成立：指數墊高、標的主升段、大戶連買、帳戶穩定、盤感清楚<br>→ 不能憑感覺切換</div>
-</div>
-</div>
-</div>
-</div>
+  <div class="section" id="tab-mode">
+    <div class="flow" style="gap:16px">
+      <div class="mode-split">
+        <div class="mode-card mode-a" onclick="openDetail('M1')">
+          <div class="mode-label">A</div>
+          <div class="mode-name">主升段 · 主動進攻</div>
+          <div class="mode-condition">大盤或族群多頭<br>標的明確主升段<br>籌碼持續偏多<br>允許加碼、攻擊性強</div>
+          <div class="mode-position">部位 60%～80%</div>
+        </div>
+        <div class="mode-card mode-b" onclick="openDetail('M2')">
+          <div class="mode-label">B</div>
+          <div class="mode-name">震盪防守 · 降頻交易</div>
+          <div class="mode-condition">盤勢不明 / 結構混亂<br>主升段不明確<br>已有戰果要守<br>只做 A+ setup</div>
+          <div class="mode-position">部位 20%～40%</div>
+        </div>
+      </div>
+      <div class="switch-row">
+        <div class="switch-card" onclick="openDetail('M3')">
+          <div class="switch-dir ab">A → B 切換</div>
+          <div class="switch-condition">主升段結束、持股轉弱、族群退潮、波動加大<br>→ 縮部位、停加碼、提高出場敏感度</div>
+        </div>
+        <div class="switch-card" onclick="openDetail('M4')">
+          <div class="switch-dir ba">B → A 切換</div>
+          <div class="switch-condition">至少3項成立：指數墊高、標的主升段、大戶連買、帳戶穩定、盤感清楚<br>→ 不能憑感覺切換</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!-- ENTRY -->
+  <!-- ENTRY -->
 
-<div class="section" id="tab-entry">
-<div class="flow">
-<div class="flow-card" style="--card-accent:#52c41a" onclick="openDetail('P1')">
-<div class="card-top"><span class="step-badge">P1</span><span class="card-title">低檔強攻試單</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">觸發條件</div><div class="field-value">回測完成；RSI上穿40~50；MACD縮口或翻紅；大戶由賣轉買；未爆量追高</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">先建立試單 30%</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">試單進場</span></div>
-</div>
-<div class="connector gold"></div>
-<div class="flow-card" style="--card-accent:#13c2c2" onclick="openDetail('P2')">
-<div class="card-top"><span class="step-badge">P2</span><span class="card-title">突破確認加碼</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">觸發條件</div><div class="field-value">突破關鍵價位；量能放大；結構站穩</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">確認後再加 30%~40%</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">加碼（非一開始就滿倉）</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#5a6375" onclick="openDetail('P3')">
-<div class="card-top"><span class="step-badge">P3</span><span class="card-title">不符合條件 → 不進場</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">低檔強攻與突破確認條件皆未滿足</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value">不進場，部位 0%</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">觀察</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#1890ff" onclick="openDetail('P4')">
-<div class="card-top"><span class="step-badge">P4</span><span class="card-title">B模式進場限制</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">當前為 B 模式</div></div>
-<div class="card-field"><div class="field-label">限制</div><div class="field-value highlight">只允許最強訊號的新倉；總部位受B模式上限限制</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">少量試單 / 不進</span></div>
-</div>
-</div>
-</div>
+  <div class="section" id="tab-entry">
+    <div class="flow">
+      <div class="flow-card" style="--card-accent:#52c41a" onclick="openDetail('P1')">
+        <div class="card-top"><span class="step-badge">P1</span><span class="card-title">低檔強攻試單</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">觸發條件</div><div class="field-value">回測完成；RSI上穿40~50；MACD縮口或翻紅；大戶由賣轉買；未爆量追高</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">先建立試單 30%</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">試單進場</span></div>
+      </div>
+      <div class="connector gold"></div>
+      <div class="flow-card" style="--card-accent:#13c2c2" onclick="openDetail('P2')">
+        <div class="card-top"><span class="step-badge">P2</span><span class="card-title">突破確認加碼</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">觸發條件</div><div class="field-value">突破關鍵價位；量能放大；結構站穩</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">確認後再加 30%~40%</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">加碼（非一開始就滿倉）</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#5a6375" onclick="openDetail('P3')">
+        <div class="card-top"><span class="step-badge">P3</span><span class="card-title">不符合條件 → 不進場</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">低檔強攻與突破確認條件皆未滿足</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value">不進場，部位 0%</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">觀察</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#1890ff" onclick="openDetail('P4')">
+        <div class="card-top"><span class="step-badge">P4</span><span class="card-title">B模式進場限制</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">當前為 B 模式</div></div>
+          <div class="card-field"><div class="field-label">限制</div><div class="field-value highlight">只允許最強訊號的新倉；總部位受B模式上限限制</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">少量試單 / 不進</span></div>
+      </div>
+    </div>
+  </div>
 
-<!-- HOLD -->
+  <!-- HOLD -->
 
-<div class="section" id="tab-hold">
-<div class="flow">
-<div class="flow-card" style="--card-accent:#52c41a" onclick="openDetail('H1')">
-<div class="card-top"><span class="step-badge">H1</span><span class="card-title">走對 → 續抱</span><span class="priority-badge priority-中">中</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">條件</div><div class="field-value">價格結構未壞；量能正常；籌碼未轉空</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">續抱，不變動部位</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">續抱</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#13c2c2" onclick="openDetail('H2')">
-<div class="card-top"><span class="step-badge">H2</span><span class="card-title">走對且突破 → 加碼</span><span class="priority-badge priority-中">中</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">條件</div><div class="field-value">已試單成功且突破確認成立</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">依規則追加部位（只加走對的單）</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">加碼</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#fa8c16" onclick="openDetail('H3')">
-<div class="card-top"><span class="step-badge">H3</span><span class="card-title">走弱 → 先減碼</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">條件</div><div class="field-value">高檔震盪轉弱；量縮不漲；籌碼背離</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">先減 1/3 或依規則（不要等整體翻空才動）</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">減碼</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#ff4d4f" onclick="openDetail('H4')">
-<div class="card-top"><span class="step-badge">H4</span><span class="card-title">走錯 → 直接砍單</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">條件</div><div class="field-value">跌破結構支撐；籌碼連續轉空；風險事件發生</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">直接減碼或出場（不能用希望代替紀律）</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">出場 / 大減碼</span></div>
-</div>
-</div>
-</div>
+  <div class="section" id="tab-hold">
+    <div class="flow">
+      <div class="flow-card" style="--card-accent:#52c41a" onclick="openDetail('H1')">
+        <div class="card-top"><span class="step-badge">H1</span><span class="card-title">走對 → 續抱</span><span class="priority-badge priority-中">中</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">條件</div><div class="field-value">價格結構未壞；量能正常；籌碼未轉空</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">續抱，不變動部位</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">續抱</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#13c2c2" onclick="openDetail('H2')">
+        <div class="card-top"><span class="step-badge">H2</span><span class="card-title">走對且突破 → 加碼</span><span class="priority-badge priority-中">中</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">條件</div><div class="field-value">已試單成功且突破確認成立</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">依規則追加部位（只加走對的單）</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">加碼</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#fa8c16" onclick="openDetail('H3')">
+        <div class="card-top"><span class="step-badge">H3</span><span class="card-title">走弱 → 先減碼</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">條件</div><div class="field-value">高檔震盪轉弱；量縮不漲；籌碼背離</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">先減 1/3 或依規則（不要等整體翻空才動）</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">減碼</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#ff4d4f" onclick="openDetail('H4')">
+        <div class="card-top"><span class="step-badge">H4</span><span class="card-title">走錯 → 直接砍單</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">條件</div><div class="field-value">跌破結構支撐；籌碼連續轉空；風險事件發生</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">直接減碼或出場（不能用希望代替紀律）</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">出場 / 大減碼</span></div>
+      </div>
+    </div>
+  </div>
 
-<!-- RULES -->
+  <!-- RULES -->
 
-<div class="section" id="tab-rules">
-<div class="rules-grid">
-<div class="rule-card" onclick="openDetail('R1')">
-<div class="rule-id">R1 · 最高</div>
-<div class="rule-title">收益鎖定線</div>
-<div class="rule-trigger">獲利 ≥ +8%~10%</div>
-<div class="rule-action">→ 直接先賣 1/2（50%）</div>
-</div>
-<div class="rule-card" onclick="openDetail('R2')">
-<div class="rule-id">R2 · 最高</div>
-<div class="rule-title">RSI過熱鎖利</div>
-<div class="rule-trigger">RSI(5) ≥ 85</div>
-<div class="rule-action">→ 直接先賣 1/2（50%）</div>
-</div>
-<div class="rule-card" onclick="openDetail('R3')">
-<div class="rule-id">R3 · 最高</div>
-<div class="rule-title">爆量衝高保命</div>
-<div class="rule-trigger">單日漲幅 ≥ +7% 且成交量 ≥ 近5日均量1.8倍</div>
-<div class="rule-action">→ 先賣 1/3（33%）</div>
-</div>
-<div class="rule-card" onclick="openDetail('R4')">
-<div class="rule-id">R4 · 最高</div>
-<div class="rule-title">結構破壞止血</div>
-<div class="rule-trigger">跌破關鍵支撐；大戶連續賣；長黑破位</div>
-<div class="rule-action">→ 砍 30%~50%，必要時全出</div>
-</div>
-<div class="rule-card" onclick="openDetail('R5')">
-<div class="rule-id">R5 · 最高</div>
-<div class="rule-title">單一持股上限</div>
-<div class="rule-trigger">建立或加碼後，單一股票部位將超過總資金30%</div>
-<div class="rule-action">→ 禁止再加碼；必要時調降至 ≤ 30%</div>
-</div>
-<div class="rule-card" onclick="openDetail('R6')">
-<div class="rule-id">R6 · 最高</div>
-<div class="rule-title">禁止攤平虧損股</div>
-<div class="rule-trigger">持股虧損中且結構未明顯轉強</div>
-<div class="rule-action">→ 禁止加碼，只能觀察或減碼</div>
-</div>
-<div class="rule-card" onclick="openDetail('R7')">
-<div class="rule-id">R7 · 最高</div>
-<div class="rule-title">禁止因成本低而不賣</div>
-<div class="rule-trigger">觸發 R1~R4 任一條件時</div>
-<div class="rule-action">→ 照規則執行（益航就是例子）</div>
-</div>
-<div class="rule-card" onclick="openDetail('R8')">
-<div class="rule-id">R8 · 最高</div>
-<div class="rule-title">禁止情緒單</div>
-<div class="rule-trigger">非計畫內標的；無完整setup；想補虧損</div>
-<div class="rule-action">→ 不得下單，部位 0%</div>
-</div>
-</div>
-</div>
+  <div class="section" id="tab-rules">
+    <div class="rules-grid">
+      <div class="rule-card" onclick="openDetail('R1')">
+        <div class="rule-id">R1 · 最高</div>
+        <div class="rule-title">收益鎖定線</div>
+        <div class="rule-trigger">獲利 ≥ +8%~10%</div>
+        <div class="rule-action">→ 直接先賣 1/2（50%）</div>
+      </div>
+      <div class="rule-card" onclick="openDetail('R2')">
+        <div class="rule-id">R2 · 最高</div>
+        <div class="rule-title">RSI過熱鎖利</div>
+        <div class="rule-trigger">RSI(5) ≥ 85</div>
+        <div class="rule-action">→ 直接先賣 1/2（50%）</div>
+      </div>
+      <div class="rule-card" onclick="openDetail('R3')">
+        <div class="rule-id">R3 · 最高</div>
+        <div class="rule-title">爆量衝高保命</div>
+        <div class="rule-trigger">單日漲幅 ≥ +7% 且成交量 ≥ 近5日均量1.8倍</div>
+        <div class="rule-action">→ 先賣 1/3（33%）</div>
+      </div>
+      <div class="rule-card" onclick="openDetail('R4')">
+        <div class="rule-id">R4 · 最高</div>
+        <div class="rule-title">結構破壞止血</div>
+        <div class="rule-trigger">跌破關鍵支撐；大戶連續賣；長黑破位</div>
+        <div class="rule-action">→ 砍 30%~50%，必要時全出</div>
+      </div>
+      <div class="rule-card" onclick="openDetail('R5')">
+        <div class="rule-id">R5 · 最高</div>
+        <div class="rule-title">單一持股上限</div>
+        <div class="rule-trigger">建立或加碼後，單一股票部位將超過總資金30%</div>
+        <div class="rule-action">→ 禁止再加碼；必要時調降至 ≤ 30%</div>
+      </div>
+      <div class="rule-card" onclick="openDetail('R6')">
+        <div class="rule-id">R6 · 最高</div>
+        <div class="rule-title">禁止攤平虧損股</div>
+        <div class="rule-trigger">持股虧損中且結構未明顯轉強</div>
+        <div class="rule-action">→ 禁止加碼，只能觀察或減碼</div>
+      </div>
+      <div class="rule-card" onclick="openDetail('R7')">
+        <div class="rule-id">R7 · 最高</div>
+        <div class="rule-title">禁止因成本低而不賣</div>
+        <div class="rule-trigger">觸發 R1~R4 任一條件時</div>
+        <div class="rule-action">→ 照規則執行（益航就是例子）</div>
+      </div>
+      <div class="rule-card" onclick="openDetail('R8')">
+        <div class="rule-id">R8 · 最高</div>
+        <div class="rule-title">禁止情緒單</div>
+        <div class="rule-trigger">非計畫內標的；無完整setup；想補虧損</div>
+        <div class="rule-action">→ 不得下單，部位 0%</div>
+      </div>
+    </div>
+  </div>
 
-<!-- EXIT -->
+  <!-- EXIT -->
 
-<div class="section" id="tab-exit">
-<div class="flow">
-<div class="flow-card" style="--card-accent:#52c41a" onclick="openDetail('E1')">
-<div class="card-top"><span class="step-badge">E1</span><span class="card-title">第一次停利</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">R1 / R2 / R3 任一成立</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">先賣 1/3~1/2（33%~50%）先保一段</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">分批停利</span></div>
-</div>
-<div class="connector gold"></div>
-<div class="flow-card" style="--card-accent:#13c2c2" onclick="openDetail('E2')">
-<div class="card-top"><span class="step-badge">E2</span><span class="card-title">第二次停利</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">第一次停利後又出現過熱 / 背離 / 爆量轉弱</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">再賣剩餘的一半（25%~35%）</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">進一步停利</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#1890ff" onclick="openDetail('E3')">
-<div class="card-top"><span class="step-badge">E3</span><span class="card-title">保留底倉</span><span class="priority-badge priority-中">中</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">條件</div><div class="field-value">有中長線題材；整體盤勢仍偏多</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">保留總持股 20% 以內底倉</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">底倉續抱</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#fa8c16" onclick="openDetail('E4')">
-<div class="card-top"><span class="step-badge">E4</span><span class="card-title">防守性出清</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">自高點回落 >5%；RSI跌回70以下</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">至少再賣 1/3（補救第一賣點）</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">補救性減碼</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#ff4d4f" onclick="openDetail('E5')">
-<div class="card-top"><span class="step-badge">E5</span><span class="card-title">風險性出清</span><span class="priority-badge priority-高">高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">自高點回落 >8%~10%；大戶/法人同步轉賣</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">持股降到 1/3 以下，必要時全出</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">防守出場</span></div>
-</div>
-<div class="connector"></div>
-<div class="flow-card" style="--card-accent:#ff4d4f" onclick="openDetail('E6')">
-<div class="card-top"><span class="step-badge">E6</span><span class="card-title">結構停損</span><span class="priority-badge priority-最高">最高</span></div>
-<div class="card-grid">
-<div class="card-field"><div class="field-label">觸發</div><div class="field-value">跌破支撐、破頸線、週線轉空</div></div>
-<div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">全部或大部分出場（不能硬撐）</div></div>
-</div>
-<div class="output-row"><span class="output-label">→</span><span class="output-value">停損</span></div>
-</div>
-</div>
-</div>
+  <div class="section" id="tab-exit">
+    <div class="flow">
+      <div class="flow-card" style="--card-accent:#52c41a" onclick="openDetail('E1')">
+        <div class="card-top"><span class="step-badge">E1</span><span class="card-title">第一次停利</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">R1 / R2 / R3 任一成立</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">先賣 1/3~1/2（33%~50%）先保一段</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">分批停利</span></div>
+      </div>
+      <div class="connector gold"></div>
+      <div class="flow-card" style="--card-accent:#13c2c2" onclick="openDetail('E2')">
+        <div class="card-top"><span class="step-badge">E2</span><span class="card-title">第二次停利</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">第一次停利後又出現過熱 / 背離 / 爆量轉弱</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">再賣剩餘的一半（25%~35%）</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">進一步停利</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#1890ff" onclick="openDetail('E3')">
+        <div class="card-top"><span class="step-badge">E3</span><span class="card-title">保留底倉</span><span class="priority-badge priority-中">中</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">條件</div><div class="field-value">有中長線題材；整體盤勢仍偏多</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">保留總持股 20% 以內底倉</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">底倉續抱</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#fa8c16" onclick="openDetail('E4')">
+        <div class="card-top"><span class="step-badge">E4</span><span class="card-title">防守性出清</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">自高點回落 &gt;5%；RSI跌回70以下</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">至少再賣 1/3（補救第一賣點）</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">補救性減碼</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#ff4d4f" onclick="openDetail('E5')">
+        <div class="card-top"><span class="step-badge">E5</span><span class="card-title">風險性出清</span><span class="priority-badge priority-高">高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">自高點回落 &gt;8%~10%；大戶/法人同步轉賣</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">持股降到 1/3 以下，必要時全出</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">防守出場</span></div>
+      </div>
+      <div class="connector"></div>
+      <div class="flow-card" style="--card-accent:#ff4d4f" onclick="openDetail('E6')">
+        <div class="card-top"><span class="step-badge">E6</span><span class="card-title">結構停損</span><span class="priority-badge priority-最高">最高</span></div>
+        <div class="card-grid">
+          <div class="card-field"><div class="field-label">觸發</div><div class="field-value">跌破支撐、破頸線、週線轉空</div></div>
+          <div class="card-field"><div class="field-label">動作</div><div class="field-value highlight">全部或大部分出場（不能硬撐）</div></div>
+        </div>
+        <div class="output-row"><span class="output-label">→</span><span class="output-value">停損</span></div>
+      </div>
+    </div>
+  </div>
 
-<!-- CHECK -->
+  <!-- CHECK -->
 
-<div class="section" id="tab-check">
-<div class="check-list">
-<div class="check-item" onclick="openDetail('C1')">
-<span class="check-num">C1</span>
-<div class="check-content">
-<div class="check-title">是否先判斷模式？</div>
-<div class="check-desc">下單前是否已確認 A 或 B 模式 → 若否，記違規</div>
-</div>
-<span class="check-severity mid">每天第一題</span>
-</div>
-<div class="check-item" onclick="openDetail('C2')">
-<span class="check-num">C2</span>
-<div class="check-content">
-<div class="check-title">是否屬計畫內交易？</div>
-<div class="check-desc">是否為預先列入候選名單之交易 → 若否，記違規（臨時起意最危險）</div>
-</div>
-<span class="check-severity mid">防情緒</span>
-</div>
-<div class="check-item" onclick="openDetail('C3')">
-<span class="check-num">C3</span>
-<div class="check-content">
-<div class="check-title">是否觸發強制規則卻未執行？</div>
-<div class="check-desc">當日是否已符合 R1~R4 任一 → 若未執行，記重大違規</div>
-</div>
-<span class="check-severity high">重大違規</span>
-</div>
-<div class="check-item" onclick="openDetail('C4')">
-<span class="check-num">C4</span>
-<div class="check-content">
-<div class="check-title">是否超過單一持股上限？</div>
-<div class="check-desc">單一個股是否 > 30% → 若是，記違規並調整</div>
-</div>
-<span class="check-severity high">防重壓</span>
-</div>
-<div class="check-item" onclick="openDetail('C5')">
-<span class="check-num">C5</span>
-<div class="check-content">
-<div class="check-title">是否出現攤平虧損股？</div>
-<div class="check-desc">虧損中是否新增部位 → 若是，記重大違規（B模式絕對禁止）</div>
-</div>
-<span class="check-severity high">重大違規</span>
-</div>
-<div class="check-item" onclick="openDetail('C6')">
-<span class="check-num">C6</span>
-<div class="check-content">
-<div class="check-title">收盤後檢討</div>
-<div class="check-desc">每日收盤後記錄今日是否違規、明日要修正什麼 → 每週再總結一次</div>
-</div>
-<span class="check-severity mid">每日執行</span>
-</div>
-</div>
-</div>
+  <div class="section" id="tab-check">
+    <div class="check-list">
+      <div class="check-item" onclick="openDetail('C1')">
+        <span class="check-num">C1</span>
+        <div class="check-content">
+          <div class="check-title">是否先判斷模式？</div>
+          <div class="check-desc">下單前是否已確認 A 或 B 模式 → 若否，記違規</div>
+        </div>
+        <span class="check-severity mid">每天第一題</span>
+      </div>
+      <div class="check-item" onclick="openDetail('C2')">
+        <span class="check-num">C2</span>
+        <div class="check-content">
+          <div class="check-title">是否屬計畫內交易？</div>
+          <div class="check-desc">是否為預先列入候選名單之交易 → 若否，記違規（臨時起意最危險）</div>
+        </div>
+        <span class="check-severity mid">防情緒</span>
+      </div>
+      <div class="check-item" onclick="openDetail('C3')">
+        <span class="check-num">C3</span>
+        <div class="check-content">
+          <div class="check-title">是否觸發強制規則卻未執行？</div>
+          <div class="check-desc">當日是否已符合 R1~R4 任一 → 若未執行，記重大違規</div>
+        </div>
+        <span class="check-severity high">重大違規</span>
+      </div>
+      <div class="check-item" onclick="openDetail('C4')">
+        <span class="check-num">C4</span>
+        <div class="check-content">
+          <div class="check-title">是否超過單一持股上限？</div>
+          <div class="check-desc">單一個股是否 &gt; 30% → 若是，記違規並調整</div>
+        </div>
+        <span class="check-severity high">防重壓</span>
+      </div>
+      <div class="check-item" onclick="openDetail('C5')">
+        <span class="check-num">C5</span>
+        <div class="check-content">
+          <div class="check-title">是否出現攤平虧損股？</div>
+          <div class="check-desc">虧損中是否新增部位 → 若是，記重大違規（B模式絕對禁止）</div>
+        </div>
+        <span class="check-severity high">重大違規</span>
+      </div>
+      <div class="check-item" onclick="openDetail('C6')">
+        <span class="check-num">C6</span>
+        <div class="check-content">
+          <div class="check-title">收盤後檢討</div>
+          <div class="check-desc">每日收盤後記錄今日是否違規、明日要修正什麼 → 每週再總結一次</div>
+        </div>
+        <span class="check-severity mid">每日執行</span>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 <!-- Detail Popup -->
 
 <div class="detail-popup" id="detailPopup" onclick="closeDetail(event)">
-<div class="detail-inner" id="detailInner">
-<button class="detail-close" onclick="closePopup()">✕ 關閉</button>
-<div id="detailContent"></div>
-</div>
+  <div class="detail-inner" id="detailInner">
+    <button class="detail-close" onclick="closePopup()">✕ 關閉</button>
+    <div id="detailContent"></div>
+  </div>
 </div>
 
 <script>
 const data = {
-S0: { step:'S0', title:'市場模式判斷', purpose:'先判斷今天該用 A 還是 B 模式', trigger:'開盤前 / 收盤後依大盤、族群、持股結構判斷', action:'先決定模式，再進入後續流程', position:'無', output:'A模式 或 B模式', priority:'最高', note:'所有交易先做這一步' },
-S1: { step:'S1', title:'進場判斷', purpose:'決定是否建立新倉', trigger:'符合低檔強攻或突破確認條件', action:'建立試單或加碼', position:'依進場規則', output:'進場 / 不進場', priority:'高', note:'先有 setup 才談交易' },
-S2: { step:'S2', title:'持有管理', purpose:'讓對的單續抱、錯的單縮手', trigger:'持股中且未觸發強制規則', action:'依趨勢、量能、籌碼管理持股', position:'依持有規則', output:'續抱 / 減碼 / 出場', priority:'高', note:'不能只會買不會管' },
-S3: { step:'S3', title:'強制規則檢查', purpose:'防止回吐獲利與擴大虧損', trigger:'只要盤中 / 收盤後符合強制條件', action:'直接執行，不再討論', position:'依強制規則', output:'強制減碼 / 強制賣出', priority:'最高', note:'可覆蓋所有其他步驟' },
-S4: { step:'S4', title:'出場執行', purpose:'完成停利或停損', trigger:'符合分批停利、結構破壞、風險事件', action:'執行分批出場或全出', position:'依出場規則', output:'部分出場 / 全出', priority:'高', note:'出場比進場更重要' },
-S5: { step:'S5', title:'交易檢討', purpose:'確認是否有違規與優化空間', trigger:'每天收盤後 / 每週檢討', action:'記錄這筆單是否遵守系統', position:'無', output:'保留 / 修正 / 記錯', priority:'中', note:'把經驗變成規則' },
-M1: { step:'M1', title:'A模式 — 主升段放大利潤', purpose:'主升段放大利潤', trigger:'大盤或族群多頭；標的明確主升段；籌碼持續偏多', action:'可提高攻擊性，允許加碼', position:'總部位可到 60%~80%', output:'主動進攻', priority:'高', note:'只用在主升段明確時' },
-M2: { step:'M2', title:'B模式 — 震盪防守', purpose:'震盪防守、減少犯錯', trigger:'盤勢不明、結構混亂、主升段不明確、已有戰果要守', action:'降頻交易，只做 A+ setup', position:'總部位建議 20%~40%', output:'B模式防守', priority:'高', note:'你現在主要用這個' },
-M3: { step:'M3', title:'A→B 切換', purpose:'市場轉弱時先保戰果', trigger:'主升段結束、持股轉弱、族群退潮、波動加大', action:'縮部位、停加碼、提高出場敏感度', position:'部位往下調', output:'B模式', priority:'高', note:'避免用 A 模式死撐' },
-M4: { step:'M4', title:'B→A 切換', purpose:'確認新一輪主升段', trigger:'至少3項成立：指數/族群墊高、熟悉標的主升段、大戶/法人連買、自己帳戶穩定、盤感清楚', action:'恢復主動進攻與加碼', position:'部位可逐步提高', output:'A模式', priority:'高', note:'不能憑感覺切換' },
-P1: { step:'P1', title:'低檔強攻試單', purpose:'提早卡位主升段起點', trigger:'回測完成；RSI上穿40~50；MACD縮口或翻紅；大戶/法人由賣轉買；未爆量追高', action:'先建立試單', position:'初始 30%', output:'試單進場', priority:'高', note:'你的強項' },
-P2: { step:'P2', title:'突破確認加碼', purpose:'確認不是假起漲', trigger:'突破關鍵價位；量能放大；結構站穩', action:'在確認後加碼', position:'再加 30%~40%', output:'加碼', priority:'高', note:'不是一開始就滿倉' },
-P3: { step:'P3', title:'不符合不進', purpose:'降低無效交易', trigger:'低檔強攻與突破確認條件皆未滿足', action:'不進場', position:'0%', output:'觀察', priority:'高', note:'寧可錯過，不要亂做' },
-P4: { step:'P4', title:'B模式進場限制', purpose:'震盪盤只做高品質 setup', trigger:'當前為 B 模式', action:'只允許最強訊號的新倉', position:'總部位受 B 模式上限限制', output:'少量試單 / 不進', priority:'高', note:'不能在 B 模式亂開倉' },
-H1: { step:'H1', title:'走對續抱', purpose:'讓對的單自然變大', trigger:'價格結構未壞；量能正常；籌碼未轉空', action:'續抱', position:'不變', output:'續抱', priority:'中', note:'不要太早把好單賣光' },
-H2: { step:'H2', title:'走對加碼', purpose:'在確認行情中放大利潤', trigger:'已試單成功且突破確認成立', action:'依規則追加部位', position:'依進場上限', output:'加碼', priority:'中', note:'只加在走對的單' },
-H3: { step:'H3', title:'走弱減碼', purpose:'保留戰果與降低風險', trigger:'高檔震盪轉弱；量縮不漲；籌碼背離', action:'先減一部分', position:'減碼 1/3 或依規則', output:'減碼', priority:'高', note:'不要等整體翻空才動' },
-H4: { step:'H4', title:'走錯砍單', purpose:'避免小錯變大錯', trigger:'跌破結構支撐；籌碼連續轉空；風險事件發生', action:'直接減碼或出場', position:'依風控規則', output:'出場 / 大減碼', priority:'高', note:'不能用希望代替紀律' },
-R1: { step:'R1', title:'收益鎖定線', purpose:'防止 +10% 變回虧損', trigger:'獲利 ≥ +8%~10%', action:'直接先賣 1/2', position:'賣出 50%', output:'強制停利', priority:'最高', note:'不問任何人' },
-R2: { step:'R2', title:'RSI過熱鎖利', purpose:'高檔過熱先鎖利', trigger:'RSI(5) ≥ 85', action:'直接先賣 1/2', position:'賣出 50%', output:'強制停利', priority:'最高', note:'可與 R1 任一成立就執行' },
-R3: { step:'R3', title:'爆量衝高保命', purpose:'防主力隔日反手出貨', trigger:'單日漲幅 ≥ +7%；成交量 ≥ 近5日均量1.8倍', action:'先賣 1/3', position:'賣出 33%', output:'強制減碼', priority:'最高', note:'長上影或尾盤出貨更要執行' },
-R4: { step:'R4', title:'結構破壞止血', purpose:'錯的單不能拖', trigger:'跌破關鍵支撐；大戶連續賣；長黑破位', action:'砍 30%~50%', position:'賣出 30%~50%', output:'強制減碼', priority:'最高', note:'必要時全出' },
-R5: { step:'R5', title:'單一持股上限', purpose:'防止一檔綁架整體資金', trigger:'建立或加碼後，單一股票部位將超過總資金30%', action:'禁止再加碼；必要時調降', position:'單一持股 ≤ 30%', output:'禁止超配', priority:'最高', note:'正新曾踩到這條' },
-R6: { step:'R6', title:'禁止攤平虧損股', purpose:'避免越跌越買', trigger:'持股虧損中且結構未明顯轉強', action:'禁止加碼', position:'0%新增', output:'只能觀察 / 減碼', priority:'最高', note:'尤其 B 模式嚴禁' },
-R7: { step:'R7', title:'禁止因成本低而不賣', purpose:'避免「我成本低」變藉口', trigger:'觸發 R1~R4 任一條件', action:'照規則執行', position:'依規則', output:'強制執行', priority:'最高', note:'益航就是例子' },
-R8: { step:'R8', title:'禁止情緒單', purpose:'避免臨時起意交易', trigger:'非計畫內標的；無完整 setup；想補虧損', action:'不得下單', position:'0%', output:'不交易', priority:'最高', note:'這條能少很多爛單' },
-E1: { step:'E1', title:'第一次停利', purpose:'先鎖獲利', trigger:'觸發 R1 / R2 / R3 任一', action:'先賣 1/3~1/2', position:'賣出 33%~50%', output:'分批停利', priority:'高', note:'先保一段' },
-E2: { step:'E2', title:'第二次停利', purpose:'高檔再過熱或動能衰退', trigger:'第一次停利後又出現過熱 / 背離 / 爆量轉弱', action:'再賣剩餘的一半', position:'再賣 25%~35%', output:'進一步停利', priority:'高', note:'讓剩下部位更輕鬆' },
-E3: { step:'E3', title:'保留底倉', purpose:'保留參與後續行情', trigger:'有中長線題材；整體盤勢仍偏多', action:'保留少量底倉', position:'總持股保留 20% 以內', output:'底倉續抱', priority:'中', note:'只能少量' },
-E4: { step:'E4', title:'防守性出清', purpose:'錯過第一賣點後補救', trigger:'自高點回落 >5%；RSI跌回70以下', action:'至少再賣 1/3', position:'賣出 33%', output:'補救性減碼', priority:'高', note:'第二次給的機會' },
-E5: { step:'E5', title:'風險性出清', purpose:'不讓獲利變大虧', trigger:'自高點回落 >8%~10%；大戶/法人同步轉賣', action:'持股降到 1/3 以下，必要時全出', position:'大幅降倉 / 全出', output:'防守出場', priority:'高', note:'錯過時要果斷' },
-E6: { step:'E6', title:'結構停損', purpose:'錯單清掉', trigger:'跌破支撐、破頸線、週線轉空', action:'全部或大部分出場', position:'依結構', output:'停損', priority:'最高', note:'不能硬撐' },
-C1: { step:'C1', title:'是否先判斷模式', purpose:'防止 A/B 混用', trigger:'下單前是否已確認 A 或 B 模式', action:'若否，記違規', position:'無', output:'合格 / 違規', priority:'中', note:'每天第一題' },
-C2: { step:'C2', title:'是否屬計畫內交易', purpose:'防情緒', trigger:'是否為預先列入候選名單之交易', action:'若否，記違規', position:'無', output:'合格 / 違規', priority:'中', note:'臨時起意最危險' },
-C3: { step:'C3', title:'是否觸發強制規則卻未執行', purpose:'防回吐', trigger:'當日是否已符合 R1~R4 任一', action:'若未執行，記重大違規', position:'無', output:'重大違規', priority:'最高', note:'這是最該記錄的' },
-C4: { step:'C4', title:'是否超過單一持股上限', purpose:'防重壓', trigger:'單一個股是否 > 30%', action:'若是，記違規並調整', position:'無', output:'違規 / 需降倉', priority:'高', note:'避免正新重演' },
-C5: { step:'C5', title:'是否出現攤平虧損股', purpose:'防越補越大洞', trigger:'虧損中是否新增部位', action:'若是，記重大違規', position:'無', output:'重大違規', priority:'最高', note:'B模式絕對禁止' },
-C6: { step:'C6', title:'收盤後檢討', purpose:'把錯誤系統化', trigger:'每日收盤後', action:'記錄今日是否違規、明日要修正什麼', position:'無', output:'檢討完成', priority:'中', note:'每週再總結一次' },
+  S0: { step:'S0', title:'市場模式判斷', purpose:'先判斷今天該用 A 還是 B 模式', trigger:'開盤前 / 收盤後依大盤、族群、持股結構判斷', action:'先決定模式，再進入後續流程', position:'無', output:'A模式 或 B模式', priority:'最高', note:'所有交易先做這一步' },
+  S1: { step:'S1', title:'進場判斷', purpose:'決定是否建立新倉', trigger:'符合低檔強攻或突破確認條件', action:'建立試單或加碼', position:'依進場規則', output:'進場 / 不進場', priority:'高', note:'先有 setup 才談交易' },
+  S2: { step:'S2', title:'持有管理', purpose:'讓對的單續抱、錯的單縮手', trigger:'持股中且未觸發強制規則', action:'依趨勢、量能、籌碼管理持股', position:'依持有規則', output:'續抱 / 減碼 / 出場', priority:'高', note:'不能只會買不會管' },
+  S3: { step:'S3', title:'強制規則檢查', purpose:'防止回吐獲利與擴大虧損', trigger:'只要盤中 / 收盤後符合強制條件', action:'直接執行，不再討論', position:'依強制規則', output:'強制減碼 / 強制賣出', priority:'最高', note:'可覆蓋所有其他步驟' },
+  S4: { step:'S4', title:'出場執行', purpose:'完成停利或停損', trigger:'符合分批停利、結構破壞、風險事件', action:'執行分批出場或全出', position:'依出場規則', output:'部分出場 / 全出', priority:'高', note:'出場比進場更重要' },
+  S5: { step:'S5', title:'交易檢討', purpose:'確認是否有違規與優化空間', trigger:'每天收盤後 / 每週檢討', action:'記錄這筆單是否遵守系統', position:'無', output:'保留 / 修正 / 記錯', priority:'中', note:'把經驗變成規則' },
+  M1: { step:'M1', title:'A模式 — 主升段放大利潤', purpose:'主升段放大利潤', trigger:'大盤或族群多頭；標的明確主升段；籌碼持續偏多', action:'可提高攻擊性，允許加碼', position:'總部位可到 60%~80%', output:'主動進攻', priority:'高', note:'只用在主升段明確時' },
+  M2: { step:'M2', title:'B模式 — 震盪防守', purpose:'震盪防守、減少犯錯', trigger:'盤勢不明、結構混亂、主升段不明確、已有戰果要守', action:'降頻交易，只做 A+ setup', position:'總部位建議 20%~40%', output:'B模式防守', priority:'高', note:'你現在主要用這個' },
+  M3: { step:'M3', title:'A→B 切換', purpose:'市場轉弱時先保戰果', trigger:'主升段結束、持股轉弱、族群退潮、波動加大', action:'縮部位、停加碼、提高出場敏感度', position:'部位往下調', output:'B模式', priority:'高', note:'避免用 A 模式死撐' },
+  M4: { step:'M4', title:'B→A 切換', purpose:'確認新一輪主升段', trigger:'至少3項成立：指數/族群墊高、熟悉標的主升段、大戶/法人連買、自己帳戶穩定、盤感清楚', action:'恢復主動進攻與加碼', position:'部位可逐步提高', output:'A模式', priority:'高', note:'不能憑感覺切換' },
+  P1: { step:'P1', title:'低檔強攻試單', purpose:'提早卡位主升段起點', trigger:'回測完成；RSI上穿40~50；MACD縮口或翻紅；大戶/法人由賣轉買；未爆量追高', action:'先建立試單', position:'初始 30%', output:'試單進場', priority:'高', note:'你的強項' },
+  P2: { step:'P2', title:'突破確認加碼', purpose:'確認不是假起漲', trigger:'突破關鍵價位；量能放大；結構站穩', action:'在確認後加碼', position:'再加 30%~40%', output:'加碼', priority:'高', note:'不是一開始就滿倉' },
+  P3: { step:'P3', title:'不符合不進', purpose:'降低無效交易', trigger:'低檔強攻與突破確認條件皆未滿足', action:'不進場', position:'0%', output:'觀察', priority:'高', note:'寧可錯過，不要亂做' },
+  P4: { step:'P4', title:'B模式進場限制', purpose:'震盪盤只做高品質 setup', trigger:'當前為 B 模式', action:'只允許最強訊號的新倉', position:'總部位受 B 模式上限限制', output:'少量試單 / 不進', priority:'高', note:'不能在 B 模式亂開倉' },
+  H1: { step:'H1', title:'走對續抱', purpose:'讓對的單自然變大', trigger:'價格結構未壞；量能正常；籌碼未轉空', action:'續抱', position:'不變', output:'續抱', priority:'中', note:'不要太早把好單賣光' },
+  H2: { step:'H2', title:'走對加碼', purpose:'在確認行情中放大利潤', trigger:'已試單成功且突破確認成立', action:'依規則追加部位', position:'依進場上限', output:'加碼', priority:'中', note:'只加在走對的單' },
+  H3: { step:'H3', title:'走弱減碼', purpose:'保留戰果與降低風險', trigger:'高檔震盪轉弱；量縮不漲；籌碼背離', action:'先減一部分', position:'減碼 1/3 或依規則', output:'減碼', priority:'高', note:'不要等整體翻空才動' },
+  H4: { step:'H4', title:'走錯砍單', purpose:'避免小錯變大錯', trigger:'跌破結構支撐；籌碼連續轉空；風險事件發生', action:'直接減碼或出場', position:'依風控規則', output:'出場 / 大減碼', priority:'高', note:'不能用希望代替紀律' },
+  R1: { step:'R1', title:'收益鎖定線', purpose:'防止 +10% 變回虧損', trigger:'獲利 ≥ +8%~10%', action:'直接先賣 1/2', position:'賣出 50%', output:'強制停利', priority:'最高', note:'不問任何人' },
+  R2: { step:'R2', title:'RSI過熱鎖利', purpose:'高檔過熱先鎖利', trigger:'RSI(5) ≥ 85', action:'直接先賣 1/2', position:'賣出 50%', output:'強制停利', priority:'最高', note:'可與 R1 任一成立就執行' },
+  R3: { step:'R3', title:'爆量衝高保命', purpose:'防主力隔日反手出貨', trigger:'單日漲幅 ≥ +7%；成交量 ≥ 近5日均量1.8倍', action:'先賣 1/3', position:'賣出 33%', output:'強制減碼', priority:'最高', note:'長上影或尾盤出貨更要執行' },
+  R4: { step:'R4', title:'結構破壞止血', purpose:'錯的單不能拖', trigger:'跌破關鍵支撐；大戶連續賣；長黑破位', action:'砍 30%~50%', position:'賣出 30%~50%', output:'強制減碼', priority:'最高', note:'必要時全出' },
+  R5: { step:'R5', title:'單一持股上限', purpose:'防止一檔綁架整體資金', trigger:'建立或加碼後，單一股票部位將超過總資金30%', action:'禁止再加碼；必要時調降', position:'單一持股 ≤ 30%', output:'禁止超配', priority:'最高', note:'正新曾踩到這條' },
+  R6: { step:'R6', title:'禁止攤平虧損股', purpose:'避免越跌越買', trigger:'持股虧損中且結構未明顯轉強', action:'禁止加碼', position:'0%新增', output:'只能觀察 / 減碼', priority:'最高', note:'尤其 B 模式嚴禁' },
+  R7: { step:'R7', title:'禁止因成本低而不賣', purpose:'避免「我成本低」變藉口', trigger:'觸發 R1~R4 任一條件', action:'照規則執行', position:'依規則', output:'強制執行', priority:'最高', note:'益航就是例子' },
+  R8: { step:'R8', title:'禁止情緒單', purpose:'避免臨時起意交易', trigger:'非計畫內標的；無完整 setup；想補虧損', action:'不得下單', position:'0%', output:'不交易', priority:'最高', note:'這條能少很多爛單' },
+  E1: { step:'E1', title:'第一次停利', purpose:'先鎖獲利', trigger:'觸發 R1 / R2 / R3 任一', action:'先賣 1/3~1/2', position:'賣出 33%~50%', output:'分批停利', priority:'高', note:'先保一段' },
+  E2: { step:'E2', title:'第二次停利', purpose:'高檔再過熱或動能衰退', trigger:'第一次停利後又出現過熱 / 背離 / 爆量轉弱', action:'再賣剩餘的一半', position:'再賣 25%~35%', output:'進一步停利', priority:'高', note:'讓剩下部位更輕鬆' },
+  E3: { step:'E3', title:'保留底倉', purpose:'保留參與後續行情', trigger:'有中長線題材；整體盤勢仍偏多', action:'保留少量底倉', position:'總持股保留 20% 以內', output:'底倉續抱', priority:'中', note:'只能少量' },
+  E4: { step:'E4', title:'防守性出清', purpose:'錯過第一賣點後補救', trigger:'自高點回落 >5%；RSI跌回70以下', action:'至少再賣 1/3', position:'賣出 33%', output:'補救性減碼', priority:'高', note:'第二次給的機會' },
+  E5: { step:'E5', title:'風險性出清', purpose:'不讓獲利變大虧', trigger:'自高點回落 >8%~10%；大戶/法人同步轉賣', action:'持股降到 1/3 以下，必要時全出', position:'大幅降倉 / 全出', output:'防守出場', priority:'高', note:'錯過時要果斷' },
+  E6: { step:'E6', title:'結構停損', purpose:'錯單清掉', trigger:'跌破支撐、破頸線、週線轉空', action:'全部或大部分出場', position:'依結構', output:'停損', priority:'最高', note:'不能硬撐' },
+  C1: { step:'C1', title:'是否先判斷模式', purpose:'防止 A/B 混用', trigger:'下單前是否已確認 A 或 B 模式', action:'若否，記違規', position:'無', output:'合格 / 違規', priority:'中', note:'每天第一題' },
+  C2: { step:'C2', title:'是否屬計畫內交易', purpose:'防情緒', trigger:'是否為預先列入候選名單之交易', action:'若否，記違規', position:'無', output:'合格 / 違規', priority:'中', note:'臨時起意最危險' },
+  C3: { step:'C3', title:'是否觸發強制規則卻未執行', purpose:'防回吐', trigger:'當日是否已符合 R1~R4 任一', action:'若未執行，記重大違規', position:'無', output:'重大違規', priority:'最高', note:'這是最該記錄的' },
+  C4: { step:'C4', title:'是否超過單一持股上限', purpose:'防重壓', trigger:'單一個股是否 > 30%', action:'若是，記違規並調整', position:'無', output:'違規 / 需降倉', priority:'高', note:'避免正新重演' },
+  C5: { step:'C5', title:'是否出現攤平虧損股', purpose:'防越補越大洞', trigger:'虧損中是否新增部位', action:'若是，記重大違規', position:'無', output:'重大違規', priority:'最高', note:'B模式絕對禁止' },
+  C6: { step:'C6', title:'收盤後檢討', purpose:'把錯誤系統化', trigger:'每日收盤後', action:'記錄今日是否違規、明日要修正什麼', position:'無', output:'檢討完成', priority:'中', note:'每週再總結一次' },
 };
 
 function switchTab(name) {
-document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-document.getElementById('tab-'+name).classList.add('active');
-event.target.classList.add('active');
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.target.classList.add('active');
 }
 
 function openDetail(id) {
-const d = data[id];
-if (!d) return;
-const priorityClass = d.priority === '最高' ? 'priority-最高' : d.priority === '高' ? 'priority-高' : 'priority-中';
-document.getElementById('detailContent').innerHTML =     `<div class="detail-step">${d.step}</div>     <div class="detail-title">${d.title}</div>     <div class="detail-row"><div class="detail-label">目的</div><div class="detail-val">${d.purpose}</div></div>     <div class="detail-divider"></div>     <div class="detail-row"><div class="detail-label">觸發條件</div><div class="detail-val">${d.trigger}</div></div>     <div class="detail-row"><div class="detail-label">執行動作</div><div class="detail-val"><strong>${d.action}</strong></div></div>     <div class="detail-row"><div class="detail-label">部位規則</div><div class="detail-val">${d.position}</div></div>     <div class="detail-row"><div class="detail-label">輸出 / 決策</div><div class="detail-val"><strong>${d.output}</strong></div></div>     <div class="detail-row"><div class="detail-label">優先級</div><div class="detail-val"><span class="priority-badge ${priorityClass}">${d.priority}</span></div></div>     <div class="note-box">${d.note}</div>`  ;
-document.getElementById('detailPopup').classList.add('open');
+  const d = data[id];
+  if (!d) return;
+  const priorityClass = d.priority === '最高' ? 'priority-最高' : d.priority === '高' ? 'priority-高' : 'priority-中';
+  document.getElementById('detailContent').innerHTML = `
+    <div class="detail-step">${d.step}</div>
+    <div class="detail-title">${d.title}</div>
+    <div class="detail-row"><div class="detail-label">目的</div><div class="detail-val">${d.purpose}</div></div>
+    <div class="detail-divider"></div>
+    <div class="detail-row"><div class="detail-label">觸發條件</div><div class="detail-val">${d.trigger}</div></div>
+    <div class="detail-row"><div class="detail-label">執行動作</div><div class="detail-val"><strong>${d.action}</strong></div></div>
+    <div class="detail-row"><div class="detail-label">部位規則</div><div class="detail-val">${d.position}</div></div>
+    <div class="detail-row"><div class="detail-label">輸出 / 決策</div><div class="detail-val"><strong>${d.output}</strong></div></div>
+    <div class="detail-row"><div class="detail-label">優先級</div><div class="detail-val"><span class="priority-badge ${priorityClass}">${d.priority}</span></div></div>
+    <div class="note-box">${d.note}</div>
+  `;
+  document.getElementById('detailPopup').classList.add('open');
 }
 
 function closeDetail(e) {
-if (e.target === document.getElementById('detailPopup')) closePopup();
+  if (e.target === document.getElementById('detailPopup')) closePopup();
 }
 function closePopup() {
-document.getElementById('detailPopup').classList.remove('open');
+  document.getElementById('detailPopup').classList.remove('open');
 }
 </script>
 
